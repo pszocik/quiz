@@ -1,20 +1,20 @@
 .game-button {
-    background-color: #3b6adc;
-    color: white;
-    padding: 10px 22px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-    margin: 10px;
-    transition: background-color 0.5s;
+  background-color: #3b6adc;
+  color: white;
+  padding: 10px 22px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.5s;
 }
 
 .game-button:hover {
-    background-color: #2c4b9a;
+  background-color: #2c4b9a;
 }
 
 .game-button:active {
-    transform: translateY(4px);
+  transform: translateY(4px);
 }
