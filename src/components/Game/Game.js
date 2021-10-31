@@ -11,9 +11,7 @@ const Game = () => {
   useEffect(() => {
     if (loadQuestion === true) {
       const url = "https://opentdb.com/api.php?amount=1";
-      fetch(url)
-        .then((response) => response.json())
-        .then((json) => {
+      fetch(url).then((response) => response.json()).then((json) => {
           const questionData = json.results[0];
           questionData.all_answers = appendUUIDToAnswers(
             shuffleAnswers(joinAnswers(questionData))
