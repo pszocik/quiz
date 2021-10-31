@@ -1,5 +1,6 @@
-import Header from "./Header";
-import Game from "./Game";
+import Header from "../Header/Header";
+import Game from "../Game/Game";
+import "./App.css";
 
 function App() {
   return (
