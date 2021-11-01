@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Question from "../Question/Question.js";
 import GameButton from "../GameButton/GameButton.js";
+import { htmlDecode } from "../../utils/utils";
 
 const Game = () => {
   const [loadQuestion, setLoadQuestion] = useState(false);
@@ -9,15 +10,20 @@ const Game = () => {
   const [points, setPoints] = useState(0);
 
   useEffect(() => {
+    const modifyQuestionData = (questionData) => {
+      return appendUUIDToAnswers(
+        shuffleAnswers(cleanAnswers(joinAnswers(questionData)))
+      );
+    };
+
     if (loadQuestion === true) {
       const url = "https://opentdb.com/api.php?amount=1";
       fetch(url)
         .then((response) => response.json())
         .then((json) => {
           const questionData = json.results[0];
-          questionData.all_answers = appendUUIDToAnswers(
-            shuffleAnswers(joinAnswers(questionData))
-          );
+          questionData.question = htmlDecode(questionData.question);
+          questionData.all_answers = modifyQuestionData(questionData);
           setQuestion(questionData);
           setLoadQuestion(false);
         });
@@ -29,14 +35,17 @@ const Game = () => {
     questionData["correct_answer"],
   ];
 
+  const cleanAnswers = (answers) => {
+    return answers.map((answer) => htmlDecode(answer));
+  };
+
   const shuffleAnswers = (answers) => {
     const shuffledAnswers = [...answers];
     return shuffledAnswers.sort((a, b) => 0.5 - Math.random());
   };
 
   const appendUUIDToAnswers = (answers) => {
-    const answersWithUUIDs = [...answers];
-    return answersWithUUIDs.map((el) => (el = { uuid: uuidv4(), answer: el }));
+    return answers.map((el) => (el = { uuid: uuidv4(), answer: el }));
   };
 
   if (Object.keys(question).length !== 0) {
