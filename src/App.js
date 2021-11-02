@@ -1,5 +1,5 @@
-import Header from "../Header/Header";
-import Game from "../Game/Game";
+import Header from "./components/Header/Header";
+import Game from "./components/Game/Game";
 import "./App.css";
 
 function App() {
