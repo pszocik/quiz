@@ -4,7 +4,7 @@ import Question from "../Question/Question.js";
 import GameButton from "../GameButton/GameButton.js";
 import { htmlDecode } from "../../utils/utils.js";
 
-const Game = () => {
+const Game = ({ setShowModal }) => {
   const [loadQuestion, setLoadQuestion] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState({});
   const [points, setPoints] = useState(0);
@@ -59,6 +59,7 @@ const Game = () => {
           setQuestion={setCurrentQuestion}
           points={points}
           setPoints={setPoints}
+          setShowModal={setShowModal}
         />
       </div>
     );

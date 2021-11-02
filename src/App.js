@@ -10,8 +10,14 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Game />
-      <Modal />
+      <Game setShowModal={setShowModal} />
+      {showModal && (
+        <Modal
+          bodyText={"Wrong answer, you lost!"}
+          buttonText={"Continue"}
+          onClick={() => setShowModal(false)}
+        />
+      )}
     </div>
   );
 }

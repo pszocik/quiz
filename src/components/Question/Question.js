@@ -7,6 +7,7 @@ const Question = ({
   setLoadQuestion,
   points,
   setPoints,
+  setShowModal,
 }) => {
   const validateAnswer = (ev, answer) => {
     if (answer === question["correct_answer"]) {
@@ -14,9 +15,9 @@ const Question = ({
       setPoints(points + 1);
       setLoadQuestion(true);
     } else {
+      setShowModal(true);
       setPoints(0);
       setQuestion({});
-      alert("Wrong answer, try again!");
     }
   };
 
