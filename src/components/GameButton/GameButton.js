@@ -1,9 +1,9 @@
 import "./GameButton.css";
 
-const GameButton = ({ text, onClick }) => {
+const GameButton = ({ onClick, children }) => {
   return (
     <button className="game-button" onClick={onClick}>
-      {text}
+      {children}
     </button>
   );
 };

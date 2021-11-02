@@ -65,7 +65,9 @@ const Game = () => {
   } else {
     return (
       <div>
-        <GameButton text={"Start game"} onClick={() => setLoadQuestion(true)} />
+        <GameButton onClick={() => setLoadQuestion(true)}>
+          Start game
+        </GameButton>
       </div>
     );
   }

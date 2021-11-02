@@ -28,8 +28,9 @@ const Question = ({
           <GameButton
             onClick={(ev) => validateAnswer(ev, answer.answer)}
             key={answer.uuid}
-            text={answer.answer}
-          />
+          >
+            {answer.answer}
+          </GameButton>
         );
       })}
     </div>
