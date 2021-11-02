@@ -6,7 +6,7 @@ import { htmlDecode } from "../../utils/utils";
 
 const Game = () => {
   const [loadQuestion, setLoadQuestion] = useState(false);
-  const [question, setQuestion] = useState({});
+  const [currentQuestion, setCurrentQuestion] = useState({});
   const [points, setPoints] = useState(0);
 
   useEffect(() => {
@@ -18,15 +18,16 @@ const Game = () => {
 
     if (loadQuestion === true) {
       const url = "https://opentdb.com/api.php?amount=1";
+      let questionData = {};
       fetch(url)
         .then((response) => response.json())
         .then((json) => {
-          const questionData = json.results[0];
+          questionData = json.results[0];
           questionData.question = htmlDecode(questionData.question);
           questionData.all_answers = modifyQuestionData(questionData);
-          setQuestion(questionData);
-          setLoadQuestion(false);
+          setCurrentQuestion(questionData);
         });
+      setLoadQuestion(false);
     }
   }, [loadQuestion]);
 
@@ -48,14 +49,14 @@ const Game = () => {
     return answers.map((el) => (el = { uuid: uuidv4(), answer: el }));
   };
 
-  if (Object.keys(question).length !== 0) {
+  if (Object.keys(currentQuestion).length !== 0) {
     return (
       <div>
         <h4>Points: {points}</h4>
         <Question
-          question={question}
+          question={currentQuestion}
           setLoadQuestion={setLoadQuestion}
-          setQuestion={setQuestion}
+          setQuestion={setCurrentQuestion}
           points={points}
           setPoints={setPoints}
         />
