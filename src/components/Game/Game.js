@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Question from "../Question/Question.js";
 import GameButton from "../GameButton/GameButton.js";
-import { htmlDecode } from "../../utils/utils";
+import { htmlDecode } from "../../utils/utils.js";
 
 const Game = () => {
   const [loadQuestion, setLoadQuestion] = useState(false);
