@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Question from "../Question/Question.js";
 import GameButton from "../GameButton/GameButton.js";
-import { htmlDecode } from "../../utils/utils.js";
+import { htmlDecode, pipe } from "../../utils/utils.js";
 
 const Game = ({ setShowModal }) => {
   const [loadQuestion, setLoadQuestion] = useState(false);
@@ -10,21 +10,20 @@ const Game = ({ setShowModal }) => {
   const [points, setPoints] = useState(0);
 
   useEffect(() => {
-    const modifyQuestionData = (questionData) => {
-      return appendUUIDToAnswers(
-        shuffleAnswers(cleanAnswers(joinAnswers(questionData)))
-      );
-    };
-
     if (loadQuestion === true) {
       const url = "https://opentdb.com/api.php?amount=1";
-      let questionData = {};
       fetch(url)
         .then((response) => response.json())
         .then((json) => {
-          questionData = json.results[0];
+          const questionData = json.results[0];
           questionData.question = htmlDecode(questionData.question);
-          questionData.all_answers = modifyQuestionData(questionData);
+          questionData.all_answers = pipe(
+            joinAnswers,
+            cleanAnswers,
+            shuffleAnswers,
+            appendUUIDToAnswers
+          )(questionData);
+
           setCurrentQuestion(questionData);
         });
       setLoadQuestion(false);
