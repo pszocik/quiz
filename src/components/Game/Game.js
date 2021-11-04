@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Question from "../Question/Question.js";
-import GameButton from "../GameButton/GameButton.js";
+import Button from "../Button/Button.js";
 import { htmlDecode, pipe } from "../../utils/utils.js";
 
 const Game = ({ setShowModal }) => {
@@ -65,9 +65,7 @@ const Game = ({ setShowModal }) => {
   } else {
     return (
       <div>
-        <GameButton onClick={() => setLoadQuestion(true)}>
-          Start game
-        </GameButton>
+        <Button onClick={() => setLoadQuestion(true)}>Start game</Button>
       </div>
     );
   }

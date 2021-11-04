@@ -1,4 +1,4 @@
-import GameButton from "../GameButton/GameButton.js";
+import Button from "../Button/Button.js";
 import "./Question.css";
 
 const Question = ({
@@ -26,12 +26,12 @@ const Question = ({
       <p>{question.question}</p>
       {question.all_answers.map((answer) => {
         return (
-          <GameButton
+          <Button
             onClick={(ev) => validateAnswer(ev, answer.answer)}
             key={answer.uuid}
           >
             {answer.answer}
-          </GameButton>
+          </Button>
         );
       })}
     </div>

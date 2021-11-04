@@ -1,6 +1,6 @@
-import "./GameButton.css";
+import "./Button.css";
 
-const GameButton = ({ onClick, children }) => {
+const Button = ({ onClick, children }) => {
   return (
     <button className="game-button" onClick={onClick}>
       {children}
@@ -8,4 +8,4 @@ const GameButton = ({ onClick, children }) => {
   );
 };
 
-export default GameButton;
+export default Button;
