@@ -13,7 +13,7 @@ const Question = ({ question, handleGoodAnswer, handleBadAnswer }) => {
   };
 
   return (
-    <div key={uuidv4()} className="question">
+    <div key={uuidv4()} className="question slide-in-left">
       <p>{question.question}</p>
       {question.all_answers.map((answer) => {
         return (

@@ -12,11 +12,12 @@ const cleanAnswers = (answers) => {
 
 const shuffleAnswers = (answers) => {
   const shuffledAnswers = [...answers];
-  return shuffledAnswers.sort((a, b) => 0.5 - Math.random());
+  // bad example of random sorting but it's enough for this app
+  return shuffledAnswers.sort(() => 0.5 - Math.random());
 };
 
 const appendUUIDToAnswers = (answers) => {
-  return answers.map((el) => (el = { uuid: uuidv4(), answer: el }));
+  return answers.map((el) => ({ uuid: uuidv4(), answer: el }));
 };
 
 export { joinAnswers, cleanAnswers, shuffleAnswers, appendUUIDToAnswers };

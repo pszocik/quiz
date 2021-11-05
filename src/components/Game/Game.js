@@ -10,14 +10,14 @@ import {
 } from "./GameUtils.js";
 import "./Game.css";
 
-const Game = ({ setShowModal }) => {
+const Game = ({ setShowLoseModal, setShowWinModal }) => {
   const [loadQuestion, setLoadQuestion] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [points, setPoints] = useState(0);
 
   useEffect(() => {
     if (loadQuestion === true) {
-      fetch("https://opentdb.com/api.php?amount=20")
+      fetch("https://opentdb.com/api.php?amount=10")
         .then((response) => response.json())
         .then((json) => {
           const questionData = json.results;
@@ -32,17 +32,25 @@ const Game = ({ setShowModal }) => {
             )(question);
           }
           setQuestions(questionData);
+          setLoadQuestion(false);
         });
     }
   }, [loadQuestion]);
 
+  useEffect(() => {
+    if (points === 10) {
+      setPoints(0);
+      setShowWinModal(true);
+    }
+  }, [points, setShowWinModal]);
+
   const handleGoodAnswer = (ev) => {
-    ev.target.style.backgroundColor = "green";
+    questions.pop();
     setPoints(points + 1);
   };
 
   const handleBadAnswer = () => {
-    setShowModal(true);
+    setShowLoseModal(true);
     setPoints(0);
     setQuestions([]);
     setLoadQuestion(false);
@@ -55,7 +63,7 @@ const Game = ({ setShowModal }) => {
           <h4 className="game-points">Points: {points}</h4>
           <Question
             key={questions.data}
-            question={questions.pop()}
+            question={questions[questions.length - 1]}
             handleGoodAnswer={handleGoodAnswer}
             handleBadAnswer={handleBadAnswer}
           />
