@@ -1,3 +1,5 @@
 .question {
+  animation: fadein 2s;
   text-align: center;
+  width: 100vw;
 }

@@ -1,28 +1,19 @@
 import Button from "../Button/Button.js";
 import "./Question.css";
+import { v4 as uuidv4 } from "uuid";
 
-const Question = ({
-  question,
-  setQuestion,
-  setLoadQuestion,
-  points,
-  setPoints,
-  setShowModal,
-}) => {
+const Question = ({ question, handleGoodAnswer, handleBadAnswer }) => {
+  console.log(question["correct_answer"]);
   const validateAnswer = (ev, answer) => {
     if (answer === question["correct_answer"]) {
-      ev.target.style.backgroundColor = "green";
-      setPoints(points + 1);
-      setLoadQuestion(true);
+      handleGoodAnswer(ev);
     } else {
-      setShowModal(true);
-      setPoints(0);
-      setQuestion({});
+      handleBadAnswer();
     }
   };
 
   return (
-    <div className="question">
+    <div key={uuidv4()} className="question">
       <p>{question.question}</p>
       {question.all_answers.map((answer) => {
         return (
