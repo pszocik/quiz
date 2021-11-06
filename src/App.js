@@ -5,7 +5,7 @@ import WinModal from "./components/Modal/WinModal.js";
 import "./App.css";
 import { useState } from "react";
 
-function App() {
+const App = () => {
   document.title = "Quiz | pszocik.github.io";
   const [showLoseModal, setShowLoseModal] = useState(false);
   const [showWinModal, setShowWinModal] = useState(false);
@@ -20,6 +20,6 @@ function App() {
       {showWinModal && <WinModal onClick={() => setShowWinModal(false)} />}
     </div>
   );
-}
+};
 
 export default App;
