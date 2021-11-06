@@ -45,7 +45,9 @@ const Game = ({ setShowLoseModal, setShowWinModal }) => {
   }, [points, setShowWinModal]);
 
   const handleGoodAnswer = (ev) => {
-    questions.pop();
+    const updatedQuestions = [...questions];
+    updatedQuestions.pop();
+    setQuestions(updatedQuestions);
     setPoints(points + 1);
   };
 
