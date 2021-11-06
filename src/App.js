@@ -1,7 +1,8 @@
 import Header from "./components/Header/Header.js";
 import Game from "./components/Game/Game.js";
-import LoseModal from "./components/Modal/LoseModal.js";
+// import LoseModal from "./components/Modal/LoseModal.js";
 import WinModal from "./components/Modal/WinModal.js";
+import FramerModal from "./components/FramerModal/FramerModal.js";
 import "./App.css";
 import { useState } from "react";
 
@@ -16,7 +17,7 @@ const App = () => {
         setShowLoseModal={setShowLoseModal}
         setShowWinModal={setShowWinModal}
       />
-      {showLoseModal && <LoseModal onClick={() => setShowLoseModal(false)} />}
+      {showLoseModal && <FramerModal onClick={() => setShowLoseModal(false)} />}
       {showWinModal && <WinModal onClick={() => setShowWinModal(false)} />}
     </div>
   );
