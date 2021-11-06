@@ -6,18 +6,13 @@ const joinAnswers = (questionData) => [
   questionData["correct_answer"],
 ];
 
-const cleanAnswers = (answers) => {
-  return answers.map((answer) => htmlDecode(answer));
-};
+const cleanAnswers = (answers) => answers.map((answer) => htmlDecode(answer));
 
-const shuffleAnswers = (answers) => {
-  const shuffledAnswers = [...answers];
+const shuffleAnswers = (answers) =>
   // bad example of random sorting but it's enough for this app
-  return shuffledAnswers.sort(() => 0.5 - Math.random());
-};
+  [...answers].sort(() => 0.5 - Math.random());
 
-const appendUUIDToAnswers = (answers) => {
-  return answers.map((el) => ({ uuid: uuidv4(), answer: el }));
-};
+const appendUUIDToAnswers = (answers) =>
+  answers.map((el) => ({ uuid: uuidv4(), answer: el }));
 
 export { joinAnswers, cleanAnswers, shuffleAnswers, appendUUIDToAnswers };
