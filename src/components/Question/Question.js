@@ -3,7 +3,6 @@ import "./Question.css";
 import { v4 as uuidv4 } from "uuid";
 
 const Question = ({ question, handleGoodAnswer, handleBadAnswer }) => {
-  console.log(question["correct_answer"]);
   const validateAnswer = (ev, answer) => {
     if (answer === question["correct_answer"]) {
       handleGoodAnswer(ev);
