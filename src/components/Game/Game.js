@@ -10,18 +10,33 @@ import {
 } from "./GameUtils.js";
 import "./Game.css";
 
-const Game = ({ setShowLoseModal, setShowWinModal }) => {
-  const [loadQuestion, setLoadQuestion] = useState(false);
+const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
+  const [loadQuestions, setLoadQuestions] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [points, setPoints] = useState(0);
 
+  const handleSetPoints = (value) => setPoints(value);
+  const handleSetQuestions = (data) => setQuestions(data);
+  const handleLoadQuestion = (value) => {
+    switch (value) {
+      case true:
+        setLoadQuestions(true);
+        break;
+      case false:
+        setLoadQuestions(false);
+        break;
+      default:
+        setLoadQuestions(false);
+    }
+  };
+
   useEffect(() => {
-    if (loadQuestion === true) {
+    if (loadQuestions === true) {
       fetch("https://opentdb.com/api.php?amount=10")
         .then((response) => response.json())
         .then((json) => {
           const questionData = json.results;
-          for (const question of questionData) {
+          questionData.forEach((question) => {
             question.question = htmlDecode(question.question);
             question.correct_answer = htmlDecode(question.correct_answer);
             question.all_answers = pipe(
@@ -30,32 +45,32 @@ const Game = ({ setShowLoseModal, setShowWinModal }) => {
               shuffleAnswers,
               appendUUIDToAnswers
             )(question);
-          }
-          setQuestions(questionData);
-          setLoadQuestion(false);
+          });
+          handleSetQuestions(questionData);
+          handleLoadQuestion(false);
         });
     }
-  }, [loadQuestion]);
+  }, [loadQuestions]);
 
   useEffect(() => {
     if (points === 10) {
-      setPoints(0);
-      setShowWinModal(true);
+      handleSetPoints(0);
+      handleWinModalShow();
     }
-  }, [points, setShowWinModal]);
+  }, [points, handleWinModalShow]);
 
   const handleGoodAnswer = (ev) => {
     const updatedQuestions = [...questions];
     updatedQuestions.pop();
-    setQuestions(updatedQuestions);
-    setPoints(points + 1);
+    handleSetQuestions(updatedQuestions);
+    handleSetPoints(points + 1);
   };
 
   const handleBadAnswer = () => {
-    setShowLoseModal(true);
-    setPoints(0);
-    setQuestions([]);
-    setLoadQuestion(false);
+    handleLoseModalShow();
+    handleSetPoints(0);
+    handleSetQuestions([]);
+    handleLoadQuestion(false);
   };
 
   return (
@@ -71,7 +86,7 @@ const Game = ({ setShowLoseModal, setShowWinModal }) => {
           />
         </div>
       ) : (
-        <Button onClick={() => setLoadQuestion(true)}>Start game</Button>
+        <Button onClick={() => handleLoadQuestion(true)}>Start game</Button>
       )}
     </div>
   );

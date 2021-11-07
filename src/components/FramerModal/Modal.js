@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Backdrop from "../Backdrop/Backdrop.js";
-import "./FramerModal.css";
+import Button from "../Button/Button.js";
+import "./Modal.css";
 
 const dropIn = {
   hidden: { y: "-100vh", opacity: 0 },
@@ -22,13 +23,14 @@ const Modal = ({ handleClose, text }) => {
     <Backdrop onClick={handleClose}>
       <motion.div
         onClick={(e) => e.stopPropagation()}
-        className="modal purple-gradient"
+        className="modal orange-gradient"
         variants={dropIn}
         initial="hidden"
         animate="visible"
         exit="exit"
       >
-        {text}
+        <p>{text}</p>
+        <Button onClick={handleClose}>Close</Button>
       </motion.div>
     </Backdrop>
   );
