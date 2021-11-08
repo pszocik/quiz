@@ -3,22 +3,21 @@ import "firebase/compat/auth";
 import Button from "../Button/Button";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCk7HwdLJRzO5qbUIPE-K7nHTdI4ngFXPU",
-  authDomain: "quiz-app-auth-d2fa3.firebaseapp.com",
-  projectId: "quiz-app-auth-d2fa3",
-  storageBucket: "quiz-app-auth-d2fa3.appspot.com",
-  messagingSenderId: "951901024436",
-  appId: "1:951901024436:web:5013594182f68c9f5a27e1",
-  measurementId: "G-J2X2F32S5P",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 
 firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
+const provider = new firebase.auth.GoogleAuthProvider();
 
 const SignIn = () => {
   const signInWithGoogle = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider);
   };
   return <Button onClick={signInWithGoogle}>Sign In with Google</Button>;
