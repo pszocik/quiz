@@ -17,18 +17,8 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
 
   const handleSetPoints = (value) => setPoints(value);
   const handleSetQuestions = (data) => setQuestions(data);
-  const handleLoadQuestion = (value) => {
-    switch (value) {
-      case true:
-        setLoadQuestions(true);
-        break;
-      case false:
-        setLoadQuestions(false);
-        break;
-      default:
-        setLoadQuestions(false);
-    }
-  };
+  const handleLoadQuestion = () => setLoadQuestions(true);
+  const handleDontLoadQuestion = () => setLoadQuestions(false);
 
   useEffect(() => {
     if (loadQuestions === true) {
@@ -47,7 +37,7 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
             )(question);
           });
           handleSetQuestions(questionData);
-          handleLoadQuestion(false);
+          handleDontLoadQuestion();
         });
     }
   }, [loadQuestions]);
@@ -70,7 +60,7 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
     handleLoseModalShow();
     handleSetPoints(0);
     handleSetQuestions([]);
-    handleLoadQuestion(false);
+    handleDontLoadQuestion();
   };
 
   return (
@@ -86,7 +76,7 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
           />
         </div>
       ) : (
-        <Button onClick={() => handleLoadQuestion(true)}>Start game</Button>
+        <Button onClick={() => handleLoadQuestion()}>Start game</Button>
       )}
     </div>
   );
