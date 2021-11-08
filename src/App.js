@@ -23,13 +23,13 @@ const App = () => {
   return (
     <div className="App">
       <Header />
+      {user && <SignOut />}
       {user ? (
         <div>
           <Game
             handleWinModalShow={handleWinModalShow}
             handleLoseModalShow={handleLoseModalShow}
           />
-          <SignOut />
         </div>
       ) : (
         <SignIn />

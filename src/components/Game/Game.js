@@ -60,7 +60,7 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
     handleLoseModalShow();
     handleSetPoints(0);
     handleSetQuestions([]);
-    handleLoadQuestion();
+    handleDontLoadQuestion();
   };
 
   return (
