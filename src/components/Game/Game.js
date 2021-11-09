@@ -38,7 +38,6 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
             )(question);
           });
           handleSetQuestions(questionData);
-          handleDontLoadQuestions();
         })
         .catch((error) => console.log(error));
     }
