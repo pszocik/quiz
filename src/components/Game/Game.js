@@ -23,10 +23,10 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
 
   useEffect(() => {
     if (loadQuestions === true) {
-      fetch("https://opentdb.com/api.php?amount=10")
-        .then((response) => response.json())
-        .then((json) => {
-          const questionData = json.results;
+      axios
+        .get("https://opentdb.com/api.php?amount=10")
+        .then((response) => {
+          const questionData = response.data.results;
           questionData.forEach((question) => {
             question.question = htmlDecode(question.question);
             question.correct_answer = htmlDecode(question.correct_answer);
@@ -39,7 +39,8 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
           });
           handleSetQuestions(questionData);
           handleDontLoadQuestions();
-        });
+        })
+        .catch((error) => console.log(error));
     }
   }, [loadQuestions]);
 
