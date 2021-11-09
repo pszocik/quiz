@@ -71,7 +71,6 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
         <div>
           <h4 className="game-points">Points: {points}</h4>
           <Question
-            key={questions.data}
             question={questions[questions.length - 1]}
             handleGoodAnswer={handleGoodAnswer}
             handleBadAnswer={handleBadAnswer}
