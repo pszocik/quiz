@@ -1,27 +1,39 @@
 import Button from "../Button/Button.js";
 import "./Question.css";
 import { v4 as uuidv4 } from "uuid";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Question = ({ question, handleGoodAnswer, handleBadAnswer }) => {
+  console.log("im rendered");
   const validateAnswer = (ev, answer) =>
     answer === question["correct_answer"]
       ? handleGoodAnswer(ev)
       : handleBadAnswer();
 
   return (
-    <div key={uuidv4()} className="question slide-in-left">
-      <p>{question.question}</p>
-      {question.all_answers.map((answer) => {
-        return (
-          <Button
-            onClick={(ev) => validateAnswer(ev, answer.answer)}
-            key={answer.uuid}
-          >
-            {answer.answer}
-          </Button>
-        );
-      })}
-    </div>
+    <AnimatePresence initial={true} exitBeforeEnter={true}>
+      <motion.div
+        className="question"
+        key={uuidv4()}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        {/*<div className="question">*/}
+        <p>{question.question}</p>
+        {question.all_answers.map((answer) => {
+          return (
+            <Button
+              onClick={(ev) => validateAnswer(ev, answer.answer)}
+              key={answer.uuid}
+            >
+              {answer.answer}
+            </Button>
+          );
+        })}
+        {/*</div>*/}
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
