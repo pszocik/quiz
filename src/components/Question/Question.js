@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from "uuid";
 import { AnimatePresence, motion } from "framer-motion";
 
 const Question = ({ question, handleGoodAnswer, handleBadAnswer }) => {
-  console.log("im rendered");
   const validateAnswer = (ev, answer) =>
     answer === question["correct_answer"]
       ? handleGoodAnswer(ev)
@@ -19,7 +18,6 @@ const Question = ({ question, handleGoodAnswer, handleBadAnswer }) => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
-        {/*<div className="question">*/}
         <p>{question.question}</p>
         {question.all_answers.map((answer) => {
           return (
@@ -31,7 +29,6 @@ const Question = ({ question, handleGoodAnswer, handleBadAnswer }) => {
             </Button>
           );
         })}
-        {/*</div>*/}
       </motion.div>
     </AnimatePresence>
   );
