@@ -1,4 +1,4 @@
-import { htmlDecode } from "../../utils/utils";
+import { htmlDecode } from "../../helpers/helpers";
 import { v4 as uuidv4 } from "uuid";
 
 const joinAnswers = (questionData) => [

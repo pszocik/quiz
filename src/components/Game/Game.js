@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import Question from "../Question/Question.js";
 import Button from "../Button/Button.js";
-import { htmlDecode, pipe } from "../../utils/utils.js";
+import { htmlDecode, pipe } from "../../helpers/helpers.js";
 import {
   joinAnswers,
   cleanAnswers,
   shuffleAnswers,
   appendUUIDToAnswers,
-} from "./GameUtils.js";
+} from "./GameHelpers.js";
 import "./Game.css";
 import axios from "axios";
 
