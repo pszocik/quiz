@@ -9,6 +9,7 @@ import {
   appendUUIDToAnswers,
 } from "./GameUtils.js";
 import "./Game.css";
+import axios from "axios";
 
 const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
   const [loadQuestions, setLoadQuestions] = useState(false);
@@ -17,8 +18,8 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
 
   const handleSetPoints = (value) => setPoints(value);
   const handleSetQuestions = (data) => setQuestions(data);
-  const handleLoadQuestion = () => setLoadQuestions(true);
-  const handleDontLoadQuestion = () => setLoadQuestions(false);
+  const handleLoadQuestions = () => setLoadQuestions(true);
+  const handleDontLoadQuestions = () => setLoadQuestions(false);
 
   useEffect(() => {
     if (loadQuestions === true) {
@@ -37,7 +38,7 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
             )(question);
           });
           handleSetQuestions(questionData);
-          handleDontLoadQuestion();
+          handleDontLoadQuestions();
         });
     }
   }, [loadQuestions]);
@@ -60,7 +61,7 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
     handleLoseModalShow();
     handleSetPoints(0);
     handleSetQuestions([]);
-    handleDontLoadQuestion();
+    handleDontLoadQuestions();
   };
 
   return (
@@ -76,7 +77,7 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
           />
         </div>
       ) : (
-        <Button onClick={() => handleLoadQuestion()}>Start game</Button>
+        <Button onClick={() => handleLoadQuestions()}>Start game</Button>
       )}
     </div>
   );

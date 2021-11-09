@@ -3,13 +3,10 @@ import "./Question.css";
 import { v4 as uuidv4 } from "uuid";
 
 const Question = ({ question, handleGoodAnswer, handleBadAnswer }) => {
-  const validateAnswer = (ev, answer) => {
-    if (answer === question["correct_answer"]) {
-      handleGoodAnswer(ev);
-    } else {
-      handleBadAnswer();
-    }
-  };
+  const validateAnswer = (ev, answer) =>
+    answer === question["correct_answer"]
+      ? handleGoodAnswer(ev)
+      : handleBadAnswer();
 
   return (
     <div key={uuidv4()} className="question slide-in-left">
