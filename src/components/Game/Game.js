@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import Question from "../Question/Question.js";
 import Button from "../Button/Button.js";
-import { htmlDecode, pipe } from "../../utils/utils.js";
+import { htmlDecode, pipe } from "../../helpers/helpers.js";
 import {
   joinAnswers,
   cleanAnswers,
   shuffleAnswers,
   appendUUIDToAnswers,
-} from "./GameUtils.js";
+} from "./GameHelpers.js";
 import "./Game.css";
+import axios from "axios";
 
 const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
   const [loadQuestions, setLoadQuestions] = useState(false);
@@ -17,15 +18,15 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
 
   const handleSetPoints = (value) => setPoints(value);
   const handleSetQuestions = (data) => setQuestions(data);
-  const handleLoadQuestion = () => setLoadQuestions(true);
-  const handleDontLoadQuestion = () => setLoadQuestions(false);
+  const handleLoadQuestions = () => setLoadQuestions(true);
+  const handleDontLoadQuestions = () => setLoadQuestions(false);
 
   useEffect(() => {
     if (loadQuestions === true) {
-      fetch("https://opentdb.com/api.php?amount=10")
-        .then((response) => response.json())
-        .then((json) => {
-          const questionData = json.results;
+      axios
+        .get("https://opentdb.com/api.php?amount=10")
+        .then((response) => {
+          const questionData = response.data.results;
           questionData.forEach((question) => {
             question.question = htmlDecode(question.question);
             question.correct_answer = htmlDecode(question.correct_answer);
@@ -37,8 +38,9 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
             )(question);
           });
           handleSetQuestions(questionData);
-          handleDontLoadQuestion();
-        });
+          handleDontLoadQuestions();
+        })
+        .catch((error) => console.log(error));
     }
   }, [loadQuestions]);
 
@@ -60,7 +62,7 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
     handleLoseModalShow();
     handleSetPoints(0);
     handleSetQuestions([]);
-    handleDontLoadQuestion();
+    handleDontLoadQuestions();
   };
 
   return (
@@ -76,7 +78,7 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
           />
         </div>
       ) : (
-        <Button onClick={() => handleLoadQuestion()}>Start game</Button>
+        <Button onClick={() => handleLoadQuestions()}>Start game</Button>
       )}
     </div>
   );
