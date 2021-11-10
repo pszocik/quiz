@@ -8,6 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
+import Button from "./components/Button/Button";
 
 const App = () => {
   document.title = "Quiz | pszocik.github.io";
@@ -23,18 +24,12 @@ const App = () => {
   return (
     <div className="App">
       <Header />
-      {user && <SignOut />}
-      {user ? (
-        <div>
-          <Game
-            handleWinModalShow={handleWinModalShow}
-            handleLoseModalShow={handleLoseModalShow}
-          />
-        </div>
-      ) : (
-        <SignIn />
-      )}
-
+      {user ? <SignOut /> : <SignIn />}
+      {user && <Button>Highscores</Button>}
+      <Game
+        handleWinModalShow={handleWinModalShow}
+        handleLoseModalShow={handleLoseModalShow}
+      />
       <AnimatePresence initial={false} exitBeforeEnter={true}>
         {showLoseModal && (
           <Modal handleClose={handleLoseModalClose} text={"You lost!"} />
