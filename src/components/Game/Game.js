@@ -10,6 +10,8 @@ import {
 } from "./GameHelpers.js";
 import "./Game.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import HomeButton from "../HomeButton/HomeButton";
 
 const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
   const [loadQuestions, setLoadQuestions] = useState(false);
@@ -65,7 +67,8 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
   };
 
   return (
-    <div>
+    <section className="game">
+      <HomeButton />
       {questions.length ? (
         <div>
           <h4 className="game-points">Points: {points}</h4>
@@ -76,9 +79,9 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
           />
         </div>
       ) : (
-        <Button onClick={() => handleLoadQuestions()}>Start game</Button>
+        <Button onClick={() => handleLoadQuestions()}>New game</Button>
       )}
-    </div>
+    </section>
   );
 };
 

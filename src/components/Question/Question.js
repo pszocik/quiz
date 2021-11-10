@@ -11,7 +11,7 @@ const Question = ({ question, handleGoodAnswer, handleBadAnswer }) => {
 
   return (
     <AnimatePresence initial={true} exitBeforeEnter={true}>
-      <motion.div
+      <motion.section
         className="question"
         key={uuidv4()}
         initial={{ opacity: 0 }}
@@ -29,7 +29,7 @@ const Question = ({ question, handleGoodAnswer, handleBadAnswer }) => {
             </Button>
           );
         })}
-      </motion.div>
+      </motion.section>
     </AnimatePresence>
   );
 };

@@ -3,18 +3,17 @@ import "./App.css";
 import Header from "./components/Header/Header.js";
 import Game from "./components/Game/Game.js";
 import Modal from "./components/Modal/Modal.js";
-import { SignIn, auth, SignOut } from "./components/Auth/Auth.js";
 import { AnimatePresence } from "framer-motion";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-import { useAuthState } from "react-firebase-hooks/auth";
-import Button from "./components/Button/Button";
+import { Route, Routes } from "react-router-dom";
+import Highscores from "./components/Highscores/Highscores";
+import Menu from "./components/Menu/Menu";
 
 const App = () => {
   document.title = "Quiz | pszocik.github.io";
   const [showLoseModal, setShowLoseModal] = useState(false);
   const [showWinModal, setShowWinModal] = useState(false);
-  const [user] = useAuthState(auth);
 
   const handleWinModalClose = () => setShowWinModal(false);
   const handleLoseModalClose = () => setShowLoseModal(false);
@@ -22,14 +21,21 @@ const App = () => {
   const handleLoseModalShow = () => setShowLoseModal(true);
 
   return (
-    <div className="App">
+    <main className="App">
       <Header />
-      {user ? <SignOut /> : <SignIn />}
-      {user && <Button>Highscores</Button>}
-      <Game
-        handleWinModalShow={handleWinModalShow}
-        handleLoseModalShow={handleLoseModalShow}
-      />
+      <Routes>
+        <Route path="/" element={<Menu />} />
+        <Route
+          path="/game"
+          element={
+            <Game
+              handleWinModalShow={handleWinModalShow}
+              handleLoseModalShow={handleLoseModalShow}
+            />
+          }
+        />
+        <Route path="Highscores" element={<Highscores />} />
+      </Routes>
       <AnimatePresence initial={false} exitBeforeEnter={true}>
         {showLoseModal && (
           <Modal handleClose={handleLoseModalClose} text={"You lost!"} />
@@ -41,7 +47,7 @@ const App = () => {
           />
         )}
       </AnimatePresence>
-    </div>
+    </main>
   );
 };
 
