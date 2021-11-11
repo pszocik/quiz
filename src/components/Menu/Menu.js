@@ -9,11 +9,11 @@ const Menu = () => {
   return (
     <section className="menu">
       {user ? <SignOut /> : <SignIn />}
-      <Link to="/game" className="link">
+      <Link to="/quiz/game" className="link">
         <Button>Game</Button>
       </Link>
       {user && (
-        <Link to="/highscores" className="link">
+        <Link to="/quiz/highscores" className="link">
           <Button>Highscores</Button>
         </Link>
       )}

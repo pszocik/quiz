@@ -27,7 +27,7 @@ const App = () => {
       <Routes>
         <Route
           exact
-          path="/"
+          path="/quiz"
           element={
             <FadeInWrapper>
               <Menu />
@@ -35,7 +35,7 @@ const App = () => {
           }
         />
         <Route
-          path="/game"
+          path="/quiz/game"
           element={
             <FadeInWrapper>
               <Game
@@ -46,7 +46,7 @@ const App = () => {
           }
         />
         <Route
-          path="Highscores"
+          path="/quiz/highscores"
           element={
             <FadeInWrapper>
               {user ? <Highscores /> : <Navigate to="/" />}
