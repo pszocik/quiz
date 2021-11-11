@@ -2,6 +2,7 @@ import Button from "../Button/Button.js";
 import "./Question.css";
 import { v4 as uuidv4 } from "uuid";
 import { AnimatePresence, motion } from "framer-motion";
+import FadeInWrapper from "../FadeInWrapper";
 
 const Question = ({ question, handleGoodAnswer, handleBadAnswer }) => {
   const validateAnswer = (ev, answer) =>
@@ -11,13 +12,7 @@ const Question = ({ question, handleGoodAnswer, handleBadAnswer }) => {
 
   return (
     <AnimatePresence initial={true} exitBeforeEnter={true}>
-      <motion.div
-        className="question"
-        key={uuidv4()}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      >
+      <FadeInWrapper className="question">
         <p>{question.question}</p>
         {question.all_answers.map((answer) => {
           return (
@@ -29,7 +24,7 @@ const Question = ({ question, handleGoodAnswer, handleBadAnswer }) => {
             </Button>
           );
         })}
-      </motion.div>
+      </FadeInWrapper>
     </AnimatePresence>
   );
 };

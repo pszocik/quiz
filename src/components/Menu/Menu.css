@@ -1,8 +1,4 @@
-.game-points {
-    margin-left: 20vw;
-}
-
-.game {
+.menu {
     display: flex;
     flex-direction: column;
     justify-content: center;

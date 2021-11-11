@@ -27,3 +27,8 @@ body {
 button {
   font-family: "Nirmala UI", "Times New Roman", serif;
 }
+
+.link {
+  text-decoration: none;
+  color: black;
+}

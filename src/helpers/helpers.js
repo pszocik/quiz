@@ -6,6 +6,6 @@ const htmlDecode = (input) => {
 const pipe =
   (...functions) =>
   (argument) =>
-    functions.reduce((arg, fn) => fn(arg), argument);
+    functions.reduce((acc, fn) => fn(acc), argument);
 
 export { htmlDecode, pipe };

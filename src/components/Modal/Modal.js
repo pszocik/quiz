@@ -30,7 +30,12 @@ const Modal = ({ handleClose, text }) => {
         exit="exit"
       >
         <p>{text}</p>
-        <Button onClick={handleClose}>Close</Button>
+        <Button
+          style={{ backgroundColor: "red !important" }}
+          onClick={handleClose}
+        >
+          Close
+        </Button>
       </motion.div>
     </Backdrop>
   );

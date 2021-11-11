@@ -7,14 +7,19 @@ import {
   cleanAnswers,
   shuffleAnswers,
   appendUUIDToAnswers,
-} from "./GameHelpers.js";
+} from "./helpers.js";
 import "./Game.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import HomeButton from "../HomeButton/HomeButton";
+import { getScores, updateScores } from "../Firebase/firestore";
+import { getFirebaseAuthUser } from "../Firebase/context";
 
 const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
   const [loadQuestions, setLoadQuestions] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [points, setPoints] = useState(0);
+  const user = getFirebaseAuthUser();
 
   const handleSetPoints = (value) => setPoints(value);
   const handleSetQuestions = (data) => setQuestions(data);
@@ -24,7 +29,7 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
   useEffect(() => {
     if (loadQuestions === true) {
       axios
-        .get("https://opentdb.com/api.php?amount=10")
+        .get("https://opentdb.com/api.php?amount=20")
         .then((response) => {
           const questionData = response.data.results;
           questionData.forEach((question) => {
@@ -44,7 +49,7 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
   }, [loadQuestions]);
 
   useEffect(() => {
-    if (points === 10) {
+    if (points === 20) {
       handleSetPoints(0);
       handleWinModalShow();
     }
@@ -59,13 +64,17 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
 
   const handleBadAnswer = () => {
     handleLoseModalShow();
+    getScores(user.email).then((data) => {
+      updateScores(user.email, points);
+    });
     handleSetPoints(0);
     handleSetQuestions([]);
     handleDontLoadQuestions();
   };
 
   return (
-    <div>
+    <section className="game">
+      <HomeButton />
       {questions.length ? (
         <div>
           <h4 className="game-points">Points: {points}</h4>
@@ -76,9 +85,9 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
           />
         </div>
       ) : (
-        <Button onClick={() => handleLoadQuestions()}>Start game</Button>
+        <Button onClick={() => handleLoadQuestions()}>New game</Button>
       )}
-    </div>
+    </section>
   );
 };
 
