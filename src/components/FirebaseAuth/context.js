@@ -1,15 +1,16 @@
 // noinspection ES6UnusedImports
 
-import app from "./config";
-import React, { createContext, useState } from "react";
+import FirebaseApp from "./config";
+import { createContext, useContext, useEffect, useState } from "react";
 import firebase from "firebase/compat/app";
+
 const FirebaseAuthContext = createContext(undefined);
 
 const FirebaseAuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const value = { user };
 
-  React.useEffect(() => {
+  useEffect(() => {
     return firebase.auth().onAuthStateChanged(setUser);
   }, []);
 
@@ -20,14 +21,14 @@ const FirebaseAuthProvider = ({ children }) => {
   );
 };
 
-function useFirebaseAuth() {
-  const context = React.useContext(FirebaseAuthContext);
+const useFirebaseAuth = () => {
+  const context = useContext(FirebaseAuthContext);
   if (context === undefined) {
     throw new Error(
       "useFirebaseAuth must be used within a FirebaseAuthProvider"
     );
   }
   return context.user;
-}
+};
 
 export { FirebaseAuthProvider, useFirebaseAuth };

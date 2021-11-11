@@ -26,7 +26,7 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
   useEffect(() => {
     if (loadQuestions === true) {
       axios
-        .get("https://opentdb.com/api.php?amount=10")
+        .get("https://opentdb.com/api.php?amount=20")
         .then((response) => {
           const questionData = response.data.results;
           questionData.forEach((question) => {
@@ -46,7 +46,7 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
   }, [loadQuestions]);
 
   useEffect(() => {
-    if (points === 10) {
+    if (points === 20) {
       handleSetPoints(0);
       handleWinModalShow();
     }
