@@ -8,7 +8,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Highscores from "./components/Highscores/Highscores";
 import Menu from "./components/Menu/Menu";
 import FadeInWrapper from "./components/FadeInWrapper";
-import { useFirebaseAuth } from "./components/FirebaseAuth/context";
+import { useFirebaseAuth } from "./components/Firebase/context";
 
 const App = () => {
   document.title = "Quiz | pszocik.github.io";

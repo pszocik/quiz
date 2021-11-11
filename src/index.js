@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
-import { FirebaseAuthProvider } from "./components/FirebaseAuth/context";
+import { FirebaseAuthProvider } from "./components/Firebase/context";
 
 ReactDOM.render(
   <BrowserRouter>

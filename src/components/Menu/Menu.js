@@ -1,8 +1,8 @@
-import { SignIn, SignOut } from "../FirebaseAuth/Auth";
+import { SignIn, SignOut } from "../Firebase/Auth";
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import "./Menu.css";
-import { useFirebaseAuth } from "../FirebaseAuth/context";
+import { useFirebaseAuth } from "../Firebase/context";
 
 const Menu = () => {
   const user = useFirebaseAuth();
