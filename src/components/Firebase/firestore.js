@@ -2,15 +2,15 @@ import FirebaseApp from "./config";
 import { getFirestore } from "firebase/firestore";
 import { doc, setDoc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
 
-export const db = getFirestore(FirebaseApp);
+const db = getFirestore(FirebaseApp);
 
-export const createDocument = (email) => {
+const createDocument = (email) => {
   return setDoc(doc(db, "highscores", email), {
     scores: [],
   });
 };
 
-export const updateScores = async (email, score) => {
+const updateScores = async (email, score) => {
   const userScoresRef = doc(db, "highscores", email);
   const today = new Date();
   const date =
@@ -21,7 +21,7 @@ export const updateScores = async (email, score) => {
   });
 };
 
-export const getScores = async (email) => {
+const getScores = async (email) => {
   const docRef = doc(db, "highscores", email);
   const docSnap = await getDoc(docRef);
 
@@ -33,3 +33,5 @@ export const getScores = async (email) => {
     return docSnap.data();
   }
 };
+
+export { getScores, createDocument, updateScores, db };
