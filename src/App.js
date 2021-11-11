@@ -8,11 +8,11 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Highscores from "./components/Highscores/Highscores";
 import Menu from "./components/Menu/Menu";
 import FadeInWrapper from "./components/FadeInWrapper";
-import { useFirebaseAuth } from "./components/Firebase/context";
+import { getFirebaseAuthUser } from "./components/Firebase/context";
 
 const App = () => {
   document.title = "Quiz | pszocik.github.io";
-  const user = useFirebaseAuth();
+  const user = getFirebaseAuthUser();
   const [showLoseModal, setShowLoseModal] = useState(false);
   const [showWinModal, setShowWinModal] = useState(false);
 

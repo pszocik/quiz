@@ -1,23 +1,33 @@
-// noinspection ES6UnusedImports
-
 import FirebaseApp from "./config";
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
 import Button from "../Button/Button";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  signOut,
+  getAuth,
+} from "firebase/auth";
 
-const auth = firebase.auth();
-const provider = new firebase.auth.GoogleAuthProvider();
+const provider = new GoogleAuthProvider();
+const auth = getAuth();
 
 const SignIn = () => {
   const signInWithGoogle = () => {
-    auth.signInWithPopup(provider);
+    signInWithPopup(auth, provider).catch((error) => {
+      console.log(error);
+    });
   };
+
   return <Button onClick={signInWithGoogle}>Sign In with Google</Button>;
 };
 
 const SignOut = () => {
-  return (
-    auth.currentUser && <Button onClick={() => auth.signOut()}>Sign Out</Button>
-  );
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  return auth.currentUser && <Button onClick={handleSignOut}>Sign Out</Button>;
 };
-export { SignIn, SignOut, auth };
+export { auth, SignIn, SignOut };

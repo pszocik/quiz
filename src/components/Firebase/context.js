@@ -1,9 +1,5 @@
-// noinspection ES6UnusedImports
-
-import FirebaseApp from "./config";
 import { createContext, useContext, useEffect, useState } from "react";
-import firebase from "firebase/compat/app";
-
+import { auth } from "./Auth";
 const FirebaseAuthContext = createContext(undefined);
 
 const FirebaseAuthProvider = ({ children }) => {
@@ -11,7 +7,7 @@ const FirebaseAuthProvider = ({ children }) => {
   const value = { user };
 
   useEffect(() => {
-    return firebase.auth().onAuthStateChanged(setUser);
+    return auth.onAuthStateChanged(setUser);
   }, []);
 
   return (
@@ -21,7 +17,7 @@ const FirebaseAuthProvider = ({ children }) => {
   );
 };
 
-const useFirebaseAuth = () => {
+const getFirebaseAuthUser = () => {
   const context = useContext(FirebaseAuthContext);
   if (context === undefined) {
     throw new Error(
@@ -31,4 +27,4 @@ const useFirebaseAuth = () => {
   return context.user;
 };
 
-export { FirebaseAuthProvider, useFirebaseAuth };
+export { FirebaseAuthProvider, getFirebaseAuthUser };

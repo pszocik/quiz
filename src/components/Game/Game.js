@@ -7,16 +7,19 @@ import {
   cleanAnswers,
   shuffleAnswers,
   appendUUIDToAnswers,
-} from "./GameHelpers.js";
+} from "./helpers.js";
 import "./Game.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import HomeButton from "../HomeButton/HomeButton";
+import { getScores, updateScores } from "../Firebase/firestore";
+import { getFirebaseAuthUser } from "../Firebase/context";
 
 const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
   const [loadQuestions, setLoadQuestions] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [points, setPoints] = useState(0);
+  const user = getFirebaseAuthUser();
 
   const handleSetPoints = (value) => setPoints(value);
   const handleSetQuestions = (data) => setQuestions(data);
@@ -61,6 +64,9 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
 
   const handleBadAnswer = () => {
     handleLoseModalShow();
+    getScores(user.email).then((data) => {
+      updateScores(user.email, points);
+    });
     handleSetPoints(0);
     handleSetQuestions([]);
     handleDontLoadQuestions();

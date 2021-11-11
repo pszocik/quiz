@@ -2,10 +2,10 @@ import { SignIn, SignOut } from "../Firebase/Auth";
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import "./Menu.css";
-import { useFirebaseAuth } from "../Firebase/context";
+import { getFirebaseAuthUser } from "../Firebase/context";
 
 const Menu = () => {
-  const user = useFirebaseAuth();
+  const user = getFirebaseAuthUser();
   return (
     <section className="menu">
       {user ? <SignOut /> : <SignIn />}
