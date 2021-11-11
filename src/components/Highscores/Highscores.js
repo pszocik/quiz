@@ -10,7 +10,7 @@ const Highscores = () => {
   const [scores, setScores] = useState([]);
   useEffect(() => {
     getScores(user.email).then((data) =>
-      setScores(data.scores.slice(-10).reverse())
+      setScores(data.scores.slice(-5).reverse())
     );
   }, []);
   return (
