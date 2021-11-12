@@ -2,7 +2,7 @@ import Button from "../Button/Button.js";
 import "./Question.css";
 import { v4 as uuidv4 } from "uuid";
 import { AnimatePresence, motion } from "framer-motion";
-import FadeInWrapper from "../FadeInWrapper";
+import FadeInWrapper from "../FadeInWrapper/FadeInWrapper";
 
 const Question = ({ question, handleGoodAnswer, handleBadAnswer }) => {
   const validateAnswer = (ev, answer) =>

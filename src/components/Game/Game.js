@@ -11,7 +11,7 @@ import {
 import "./Game.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import HomeButton from "../HomeButton/HomeButton";
+import MenuButton from "../MenuButton/MenuButton";
 import { getScores, updateScores } from "../Firebase/firestore";
 import { getFirebaseAuthUser } from "../Firebase/context";
 
@@ -73,7 +73,6 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
 
   return (
     <section className="game">
-      <HomeButton />
       {questions.length ? (
         <div>
           <h4 className="game-points">Points: {points}</h4>

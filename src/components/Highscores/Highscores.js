@@ -1,9 +1,10 @@
-import HomeButton from "../HomeButton/HomeButton";
+import MenuButton from "../MenuButton/MenuButton";
 import "./Highscores.css";
 import { v4 as uuidv4 } from "uuid";
 import { getFirebaseAuthUser } from "../Firebase/context";
 import { useEffect, useState } from "react";
 import { getScores } from "../Firebase/firestore";
+import FadeInWrapper from "../FadeInWrapper/FadeInWrapper";
 
 const Highscores = () => {
   const user = getFirebaseAuthUser();
@@ -15,11 +16,12 @@ const Highscores = () => {
   }, []);
   return (
     <main className="highscores">
-      <HomeButton />
       <h2>Highscores</h2>
-      {scores.map((score) => {
-        return <p key={uuidv4()}>{score}</p>;
-      })}
+      <FadeInWrapper>
+        {scores.map((score) => {
+          return <p key={uuidv4()}>{score}</p>;
+        })}
+      </FadeInWrapper>
     </main>
   );
 };

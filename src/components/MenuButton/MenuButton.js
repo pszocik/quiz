@@ -1,7 +1,7 @@
 import Button from "../Button/Button";
 import { Link } from "react-router-dom";
 
-const HomeButton = () => {
+const MenuButton = () => {
   return (
     <Link to="/quiz" className="link">
       <Button>Menu</Button>
@@ -9,4 +9,4 @@ const HomeButton = () => {
   );
 };
 
-export default HomeButton;
+export default MenuButton;
