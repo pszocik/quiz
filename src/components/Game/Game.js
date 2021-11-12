@@ -63,8 +63,8 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
   const handleBadAnswer = () => {
     handleLoseModalShow();
     user &&
-      getScores(user.email).then((data) => {
-        updateScores(user.email, points);
+      getScores(user.uid).then((data) => {
+        updateScores(user.uid, points);
       });
     handleSetPoints(0);
     handleSetQuestions([]);

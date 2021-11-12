@@ -4,17 +4,17 @@ import { doc, setDoc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
 
 const db = getFirestore(FirebaseApp);
 
-const createDocument = (email) => {
-  const highscoresRef = doc(db, "highscores", email);
+const createDocument = (uid) => {
+  const highscoresRef = doc(db, "highscores", uid);
   setDoc(highscoresRef, {
     scores: [],
   })
-    .then((data) => console.log("Document created successfully."))
+    .then(() => console.log("Document created successfully."))
     .catch((err) => console.log(err));
 };
 
-const updateScores = (email, score) => {
-  const userScoresRef = doc(db, "highscores", email);
+const updateScores = (uid, score) => {
+  const userScoresRef = doc(db, "highscores", uid);
   const today = new Date();
   const date =
     today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
@@ -22,16 +22,16 @@ const updateScores = (email, score) => {
   updateDoc(userScoresRef, {
     scores: arrayUnion(`${date} ${time} Points: ${score}`),
   })
-    .then((data) => console.log("Highscores updated successfully!"))
+    .then(() => console.log("Highscores updated successfully!"))
     .catch((err) => console.log(err));
 };
 
-const getScores = async (email) => {
-  const docRef = doc(db, "highscores", email);
-  const docSnap = await getDoc(docRef);
-  if (docSnap.exists() === false) {
-    await createDocument(email);
-    await getDoc(docRef);
+const getScores = async (uid) => {
+  const docRef = doc(db, "highscores", uid);
+  let docSnap = await getDoc(docRef);
+  if (docSnap.exists() !== true) {
+    await createDocument(uid);
+    docSnap = await getDoc(docRef);
   }
   return docSnap.data();
 };

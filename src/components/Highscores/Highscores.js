@@ -9,9 +9,10 @@ const Highscores = () => {
   const user = getFirebaseAuthUser();
   const [scores, setScores] = useState([]);
   useEffect(() => {
-    getScores(user.email).then((data) =>
-      setScores(data.scores.slice(-5).reverse())
-    );
+    getScores(user.uid).then((data) => {
+      console.log(data);
+      setScores(data.scores.slice(-5).reverse());
+    });
   }, []);
   return (
     <main className="highscores">
