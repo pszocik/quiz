@@ -24,14 +24,11 @@ const updateScores = async (email, score) => {
 const getScores = async (email) => {
   const docRef = doc(db, "highscores", email);
   const docSnap = await getDoc(docRef);
-
-  if (docSnap.exists()) {
-    return docSnap.data();
-  } else {
+  if (docSnap.exists() === false) {
     await createDocument(email);
     await getDoc(docRef);
-    return docSnap.data();
   }
+  return docSnap.data();
 };
 
 export { getScores, createDocument, updateScores, db };
