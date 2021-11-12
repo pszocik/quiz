@@ -1,3 +1,4 @@
+/*noinspection CssInvalidAtRule*/
 @import-normalize;
 
 body {
@@ -19,8 +20,7 @@ body {
   width: 100vw;
   height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: column; ;
   align-items: center;
   border-radius: 30px;
 }

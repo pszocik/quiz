@@ -1,3 +1,5 @@
 .header {
     text-shadow: 0 4px 6px rgba(66, 68, 90, 1);
+    margin-top: min(120px, 10%);
+    margin-bottom: min(60px, 10%);
 }
