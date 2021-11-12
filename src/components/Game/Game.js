@@ -27,32 +27,30 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
   const handleDontLoadQuestions = () => setLoadQuestions(false);
 
   useEffect(() => {
-    if (loadQuestions === true) {
-      axios
-        .get("https://opentdb.com/api.php?amount=20")
-        .then((response) => {
-          const questionData = response.data.results;
-          questionData.forEach((question) => {
-            question.question = htmlDecode(question.question);
-            question.correct_answer = htmlDecode(question.correct_answer);
-            question.all_answers = pipe(
-              joinAnswers,
-              cleanAnswers,
-              shuffleAnswers,
-              appendUUIDToAnswers
-            )(question);
-          });
-          handleSetQuestions(questionData);
-        })
-        .catch((error) => console.log(error));
-    }
+    if (loadQuestions === false) return;
+    axios
+      .get("https://opentdb.com/api.php?amount=20")
+      .then((response) => {
+        const questionData = response.data.results;
+        questionData.forEach((question) => {
+          question.question = htmlDecode(question.question);
+          question.correct_answer = htmlDecode(question.correct_answer);
+          question.all_answers = pipe(
+            joinAnswers,
+            cleanAnswers,
+            shuffleAnswers,
+            appendUUIDToAnswers
+          )(question);
+        });
+        handleSetQuestions(questionData);
+      })
+      .catch((error) => console.log(error));
   }, [loadQuestions]);
 
   useEffect(() => {
-    if (points === 20) {
-      handleSetPoints(0);
-      handleWinModalShow();
-    }
+    if (points < 20) return;
+    handleSetPoints(0);
+    handleWinModalShow();
   }, [points, handleWinModalShow]);
 
   const handleGoodAnswer = (ev) => {
