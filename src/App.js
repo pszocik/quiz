@@ -10,6 +10,7 @@ import Menu from "./components/Menu/Menu";
 import FadeInWrapper from "./components/FadeInWrapper/FadeInWrapper";
 import { getFirebaseAuthUser } from "./components/Firebase/context";
 import MenuButton from "./components/MenuButton/MenuButton";
+import { v4 as uuidv4 } from "uuid";
 
 const App = () => {
   document.title = "Quiz | pszocik.github.io";
@@ -25,13 +26,17 @@ const App = () => {
   return (
     <main className="App">
       <Header />
-      {location.pathname !== "/quiz" && <MenuButton />}
+      {location.pathname !== "/quiz" && (
+        <FadeInWrapper key={uuidv4()}>
+          <MenuButton />
+        </FadeInWrapper>
+      )}
       <Routes>
         <Route
           exact
           path="/quiz"
           element={
-            <FadeInWrapper>
+            <FadeInWrapper key={uuidv4()}>
               <Menu />
             </FadeInWrapper>
           }
@@ -39,7 +44,7 @@ const App = () => {
         <Route
           path="/quiz/game"
           element={
-            <FadeInWrapper>
+            <FadeInWrapper key={uuidv4()}>
               <Game
                 handleWinModalShow={handleWinModalShow}
                 handleLoseModalShow={handleLoseModalShow}
@@ -50,7 +55,7 @@ const App = () => {
         <Route
           path="/quiz/highscores"
           element={
-            <FadeInWrapper>
+            <FadeInWrapper key={uuidv4()}>
               {user ? <Highscores /> : <Navigate to="/" />}
             </FadeInWrapper>
           }

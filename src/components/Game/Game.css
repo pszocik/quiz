@@ -2,7 +2,7 @@
     margin-left: 20vw;
 }
 
-.game {
+.game-flex {
     display: flex;
     flex-direction: column;
     justify-content: center;

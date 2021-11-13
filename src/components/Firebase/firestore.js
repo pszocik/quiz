@@ -1,4 +1,4 @@
-import FirebaseApp from "./config";
+import FirebaseApp from "./config.js";
 import { getFirestore } from "firebase/firestore";
 import { doc, setDoc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
 

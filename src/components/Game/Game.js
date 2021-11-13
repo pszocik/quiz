@@ -11,9 +11,10 @@ import {
 import "./Game.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import MenuButton from "../MenuButton/MenuButton";
-import { getScores, updateScores } from "../Firebase/firestore";
-import { getFirebaseAuthUser } from "../Firebase/context";
+import MenuButton from "../MenuButton/MenuButton.js";
+import { getScores, updateScores } from "../Firebase/firestore.js";
+import { getFirebaseAuthUser } from "../Firebase/context.js";
+import ProgressBar from "../ProgressBar/ProgressBar.js";
 
 const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
   const [loadQuestions, setLoadQuestions] = useState(false);
@@ -72,15 +73,15 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
   };
 
   return (
-    <section className="game">
+    <section>
       {questions.length ? (
-        <div>
-          <h4 className="game-points">Points: {points}</h4>
+        <div className="game-flex">
           <Question
             question={questions[questions.length - 1]}
             handleGoodAnswer={handleGoodAnswer}
             handleBadAnswer={handleBadAnswer}
           />
+          <ProgressBar completed={points * 5} />
         </div>
       ) : (
         <Button onClick={() => handleLoadQuestions()}>New game</Button>

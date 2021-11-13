@@ -10,14 +10,13 @@ const Highscores = () => {
   const [scores, setScores] = useState([]);
   useEffect(() => {
     getScores(user.uid).then((data) => {
-      console.log(data);
       setScores(data.scores.slice(-5).reverse());
     });
   }, []);
   return (
     <main className="highscores">
       <h2>Highscores</h2>
-      <FadeInWrapper>
+      <FadeInWrapper key={uuidv4()}>
         {scores.map((score) => {
           return <p key={uuidv4()}>{score}</p>;
         })}
