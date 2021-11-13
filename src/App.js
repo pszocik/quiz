@@ -26,7 +26,7 @@ const App = () => {
   return (
     <main className="App">
       <Header />
-      {location.pathname !== "/quiz" && (
+      {location.pathname !== "/quiz/" && location.pathname !== "/quiz" && (
         <FadeInWrapper key={uuidv4()}>
           <MenuButton />
         </FadeInWrapper>
