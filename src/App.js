@@ -34,7 +34,7 @@ const App = () => {
       <Routes>
         <Route
           exact
-          path="/quiz"
+          path="/quiz/"
           element={
             <FadeInWrapper key={uuidv4()}>
               <Menu />
