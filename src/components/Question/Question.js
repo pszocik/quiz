@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import FadeInWrapper from "../FadeInWrapper/FadeInWrapper";
 
 const Question = ({ question, handleGoodAnswer, handleBadAnswer }) => {
-  console.log(question["correct_answer"]);
   const validateAnswer = (ev, answer) =>
     answer === question["correct_answer"]
       ? handleGoodAnswer(ev)
