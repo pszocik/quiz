@@ -13,19 +13,17 @@ const Question = ({ question, handleGoodAnswer, handleBadAnswer }) => {
   return (
     <AnimatePresence exitBeforeEnter>
       <FadeInWrapper className="question" key={uuidv4()}>
-        <div>
-          <p>{question.question}</p>
-          {question.all_answers.map((answer) => {
-            return (
-              <Button
-                onClick={(ev) => validateAnswer(ev, answer.answer)}
-                key={answer.uuid}
-              >
-                {answer.answer}
-              </Button>
-            );
-          })}
-        </div>
+        <p>{question.question}</p>
+        {question.all_answers.map((answer) => {
+          return (
+            <Button
+              onClick={(ev) => validateAnswer(ev, answer.answer)}
+              key={answer.uuid}
+            >
+              {answer.answer}
+            </Button>
+          );
+        })}
       </FadeInWrapper>
     </AnimatePresence>
   );
