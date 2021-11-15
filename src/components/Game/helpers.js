@@ -1,4 +1,4 @@
-import { htmlDecode } from "../../helpers/helpers";
+import { htmlDecode, pipe } from "../../helpers/helpers";
 import { v4 as uuidv4 } from "uuid";
 
 const joinAnswers = (questionData) => [
@@ -15,4 +15,11 @@ const shuffleAnswers = (answers) =>
 const appendUUIDToAnswers = (answers) =>
   answers.map((el) => ({ uuid: uuidv4(), answer: el }));
 
-export { joinAnswers, cleanAnswers, shuffleAnswers, appendUUIDToAnswers };
+const modifyQuestionAnswers = pipe(
+  joinAnswers,
+  cleanAnswers,
+  shuffleAnswers,
+  appendUUIDToAnswers
+);
+
+export { modifyQuestionAnswers };

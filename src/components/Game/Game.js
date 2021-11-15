@@ -7,6 +7,7 @@ import {
   cleanAnswers,
   shuffleAnswers,
   appendUUIDToAnswers,
+  modifyQuestionAnswers,
 } from "./helpers.js";
 import "./Game.css";
 import axios from "axios";
@@ -36,12 +37,7 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
         questionData.forEach((question) => {
           question.question = htmlDecode(question.question);
           question.correct_answer = htmlDecode(question.correct_answer);
-          question.all_answers = pipe(
-            joinAnswers,
-            cleanAnswers,
-            shuffleAnswers,
-            appendUUIDToAnswers
-          )(question);
+          question.all_answers = modifyQuestionAnswers(question);
         });
         handleSetQuestions(questionData);
       })
