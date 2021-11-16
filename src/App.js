@@ -10,7 +10,6 @@ import Menu from "./components/Menu/Menu";
 import FadeInWrapper from "./components/FadeInWrapper/FadeInWrapper";
 import { getFirebaseAuthUser } from "./components/Firebase/context";
 import MenuButton from "./components/MenuButton/MenuButton";
-import { v4 as uuidv4 } from "uuid";
 
 const App = () => {
   document.title = "Quiz | pszocik.github.io";
@@ -25,35 +24,19 @@ const App = () => {
     <main className="App">
       <Header />
       {location.pathname !== "/quiz/" && location.pathname !== "/quiz" && (
-        <FadeInWrapper key={uuidv4()}>
+        <FadeInWrapper>
           <MenuButton />
         </FadeInWrapper>
       )}
       <Routes>
-        <Route
-          exact
-          path="/quiz/"
-          element={
-            <FadeInWrapper key={uuidv4()}>
-              <Menu />
-            </FadeInWrapper>
-          }
-        />
+        <Route exact path="/quiz/" element={<Menu />} />
         <Route
           path="/quiz/game"
-          element={
-            <FadeInWrapper key={uuidv4()}>
-              <Game handleModalShow={handleModalShow} />
-            </FadeInWrapper>
-          }
+          element={<Game handleModalShow={handleModalShow} />}
         />
         <Route
           path="/quiz/highscores"
-          element={
-            <FadeInWrapper key={uuidv4()}>
-              {user ? <Highscores /> : <Navigate to="/" />}
-            </FadeInWrapper>
-          }
+          element={<div>{user ? <Highscores /> : <Navigate to="/" />}</div>}
         />
       </Routes>
       <AnimatePresence initial={false} exitBeforeEnter={true}>
