@@ -15,13 +15,11 @@ import { v4 as uuidv4 } from "uuid";
 const App = () => {
   document.title = "Quiz | pszocik.github.io";
   const user = getFirebaseAuthUser();
-  const [showLoseModal, setShowLoseModal] = useState(false);
-  const [showWinModal, setShowWinModal] = useState(false);
+  const [modal, setModal] = useState({ show: false, text: "" });
   let location = useLocation();
-  const handleWinModalClose = () => setShowWinModal(false);
-  const handleLoseModalClose = () => setShowLoseModal(false);
-  const handleWinModalShow = () => setShowWinModal(true);
-  const handleLoseModalShow = () => setShowLoseModal(true);
+
+  const handleModalClose = () => setModal({ show: false, text: "" });
+  const handleModalShow = (text) => setModal({ show: true, text: text });
 
   return (
     <main className="App">
@@ -45,10 +43,7 @@ const App = () => {
           path="/quiz/game"
           element={
             <FadeInWrapper key={uuidv4()}>
-              <Game
-                handleWinModalShow={handleWinModalShow}
-                handleLoseModalShow={handleLoseModalShow}
-              />
+              <Game handleModalShow={handleModalShow} />
             </FadeInWrapper>
           }
         />
@@ -62,14 +57,8 @@ const App = () => {
         />
       </Routes>
       <AnimatePresence initial={false} exitBeforeEnter={true}>
-        {showLoseModal && (
-          <Modal handleClose={handleLoseModalClose} text={"You lost!"} />
-        )}
-        {showWinModal && (
-          <Modal
-            handleClose={handleWinModalClose}
-            text={"Congratulations! You won!"}
-          />
+        {modal.show && (
+          <Modal handleClose={handleModalClose} text={modal.text} />
         )}
       </AnimatePresence>
     </main>

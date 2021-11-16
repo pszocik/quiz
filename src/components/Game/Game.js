@@ -17,7 +17,7 @@ import { getScores, updateScores } from "../Firebase/firestore.js";
 import { getFirebaseAuthUser } from "../Firebase/context.js";
 import ProgressBar from "../ProgressBar/ProgressBar.js";
 
-const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
+const Game = ({ handleModalShow }) => {
   const [loadQuestions, setLoadQuestions] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [points, setPoints] = useState(0);
@@ -47,8 +47,8 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
   useEffect(() => {
     if (points < 20) return;
     handleSetPoints(0);
-    handleWinModalShow();
-  }, [points, handleWinModalShow]);
+    handleModalShow("You won!");
+  }, [points, handleModalShow]);
 
   const handleGoodAnswer = (ev) => {
     const updatedQuestions = [...questions];
@@ -58,7 +58,7 @@ const Game = ({ handleWinModalShow, handleLoseModalShow }) => {
   };
 
   const handleBadAnswer = () => {
-    handleLoseModalShow();
+    handleModalShow("You lost!");
     user &&
       getScores(user.uid).then((data) => {
         updateScores(user.uid, points);
