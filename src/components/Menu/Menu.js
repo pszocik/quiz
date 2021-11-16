@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import "./Menu.css";
 import { getFirebaseAuthUser } from "../Firebase/context";
+import FadeInWrapper from "../FadeInWrapper/FadeInWrapper";
 
 const Menu = () => {
   const user = getFirebaseAuthUser();
   return (
-    <section className="menu">
+    <FadeInWrapper className={"menu"}>
       {user ? <SignOut /> : <SignIn />}
       <Link to="/quiz/game" className="link">
         <Button>Game</Button>
@@ -17,7 +18,7 @@ const Menu = () => {
           <Button>Highscores</Button>
         </Link>
       )}
-    </section>
+    </FadeInWrapper>
   );
 };
 

@@ -11,11 +11,13 @@ import {
 } from "./helpers.js";
 import "./Game.css";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
 import MenuButton from "../MenuButton/MenuButton.js";
 import { getScores, updateScores } from "../Firebase/firestore.js";
 import { getFirebaseAuthUser } from "../Firebase/context.js";
 import ProgressBar from "../ProgressBar/ProgressBar.js";
+import FadeInWrapper from "../FadeInWrapper/FadeInWrapper";
 
 const Game = ({ handleModalShow }) => {
   const [loadQuestions, setLoadQuestions] = useState(false);
@@ -35,6 +37,7 @@ const Game = ({ handleModalShow }) => {
       .then((response) => {
         const questionData = response.data.results;
         questionData.forEach((question) => {
+          question.uuid = uuidv4();
           question.question = htmlDecode(question.question);
           question.correct_answer = htmlDecode(question.correct_answer);
           question.all_answers = modifyQuestionAnswers(question);
@@ -69,7 +72,7 @@ const Game = ({ handleModalShow }) => {
   };
 
   return (
-    <section>
+    <FadeInWrapper>
       {questions.length ? (
         <div className="game-flex">
           <Question
@@ -82,7 +85,7 @@ const Game = ({ handleModalShow }) => {
       ) : (
         <Button onClick={() => handleLoadQuestions()}>New game</Button>
       )}
-    </section>
+    </FadeInWrapper>
   );
 };
 

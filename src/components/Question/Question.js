@@ -1,6 +1,5 @@
 import Button from "../Button/Button.js";
 import "./Question.css";
-import { v4 as uuidv4 } from "uuid";
 import { AnimatePresence, motion } from "framer-motion";
 import FadeInWrapper from "../FadeInWrapper/FadeInWrapper";
 
@@ -12,7 +11,7 @@ const Question = ({ question, handleGoodAnswer, handleBadAnswer }) => {
 
   return (
     <AnimatePresence exitBeforeEnter>
-      <FadeInWrapper className="question" key={uuidv4()}>
+      <FadeInWrapper className="question" key={question.uuid}>
         <p>{question.question}</p>
         {question.all_answers.map((answer) => {
           return (
